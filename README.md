@@ -38,19 +38,24 @@ Collection ini menyimpan informasi tentang tempat-tempat yang tercantum di dalam
 
 #### Contoh Struktur Dokumen:
 ```json
-{
-  "_id": ObjectId("60c72b2f9b1e8b5d2f8f7e1a"),
-  "name": "Central Park",
-  "location": {
-    "type": "Point",
-    "coordinates": [-73.965355, 40.782865]
-  },
-  "description": "A large public park in New York City.",
-  "category": "Park",
-  "rating": 4.8,
-  "created_at": ISODate("2023-09-08T14:48:00Z")
-}
-
+ {
+    _id: ObjectId('66dd7c98225bf0169aa10757'),
+    title: 'Candi Prambanan',
+    price: 20000,
+    description: 'Prambanan is a 9th-century Hindu temple compound in the Special Region of Yogyakarta, in southern Java, Indonesia, dedicated to the Trimūrti, the expression of God as the Creator, the Preserver and the Destroyer.',
+    location: 'Seleman, Indonesia',
+    geometry: { type: 'Point', coordinates: [ 110.34875, -7.70267 ] },
+    reviews: [ ObjectId('66dd7cf9225bf0169aa10778') ],
+    images: [
+      {
+        url: 'public\\images\\image-1725791383231-984049738.png',
+        filename: 'image-1725791383231-984049738.png',
+        _id: ObjectId('66dd7c98225bf0169aa10758')
+      }
+    ],
+    author: ObjectId('66b9e1571696f4d4ceead7cb'),
+    __v: 1
+  }
 
 ## Instalasi
 
