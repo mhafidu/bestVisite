@@ -14,6 +14,7 @@ Merupakan Aplikasi Website yang memberikan informasi tentang tempat wisata terba
 - [ ] Upload Gambar
 
 ## Screenshot
+![Tampilan Home](./screenshot/1.png)
 
 ## Instalasi
 
