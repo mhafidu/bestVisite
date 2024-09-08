@@ -11,7 +11,9 @@ Merupakan Aplikasi Website yang memberikan informasi tentang tempat wisata terba
 - [ ] Database menggunakan MongoDB
 - [ ] Maps HereMaps
 - [ ] css CDN Tailwind
-- [ ] Upload Gambar 
+- [ ] Upload Gambar
+
+## Screenshot
 
 ## Instalasi
 
@@ -22,3 +24,4 @@ git clone https://github.com/username/repository-name.git
 cd repository-name
 npm install
 npm start
+
