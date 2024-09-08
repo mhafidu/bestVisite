@@ -10,7 +10,7 @@ Merupakan Aplikasi Website yang memberikan informasi tentang tempat wisata terba
 - [ ] Acess Login dan Logout
 - [ ] Database menggunakan MongoDB
 - [ ] Maps HereMaps
-- [ ] css CDN Tailwind
+- [ ] CSS CDN Tailwind
 - [ ] Upload Gambar
 
 ## Screenshot
