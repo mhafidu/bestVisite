@@ -14,14 +14,14 @@ Merupakan Aplikasi Website yang memberikan informasi tentang tempat wisata terba
 - [ ] Upload Gambar
 
 ## Screenshot
-- [ ] Home
+### Home
 ![Tampilan Home](./screenshot/1.png)
 ![Tampilan Home](./screenshot/2.png)
-- [ ] Places
+### Places
 ![Tampilan Home](./screenshot/3.png)
-- [ ] Show Places
+### Show Places
 ![Tampilan Home](./screenshot/4.png)
-- [ ] Edit
+### Edit
 ![Tampilan Home](./screenshot/5.png)
 
 # Bestpoint MongoDB Database
