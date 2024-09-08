@@ -1,0 +1,21 @@
+<%- layout('layouts/app') %>
+<h1 class="text-center text-2xl font-bold mb-8">Add Place</h1>
+<div class="w-full max-w-md mx-auto mt-16 mb-16 px-4">
+    <form action="/login" method="POST" class="space-y-4" novalidate>
+        <div class="mb-4">
+            <label for="username" class="block text-gray-700 font-medium">Username</label>
+            <input type="text" name="username" id="username" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <div class="text-red-600 mt-1 hidden peer-invalid:block">
+                Input cannot be empty
+            </div>
+        </div>
+        <div class="mb-4">
+            <label for="password" class="block text-gray-700 font-medium">Password</label>
+            <input type="password" name="password" id="password" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <div class="text-red-600 mt-1 hidden peer-invalid:block">
+                Input cannot be empty
+            </div>
+        </div>
+        <button type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">Login</button>
+    </form>
+</div>

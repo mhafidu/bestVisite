@@ -1,0 +1,9 @@
+<%- layout('/layouts/app') %>
+<div class="flex justify-center items-center h-screen">
+    <div class="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg shadow-md w-full max-w-lg">
+        <h4 class="text-xl font-bold mb-2">
+            <%= err.statusCode %> <%= err.message %>
+        </h4>
+        <p><%= err %></p>
+    </div>
+</div>

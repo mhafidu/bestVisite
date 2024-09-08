@@ -1,0 +1,122 @@
+<%- layout('layouts/app') %>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Menghilangkan scrollbar untuk elemen dengan class .scrollbar-hidden */
+        .scrollbar-hidden::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hidden {
+            -ms-overflow-style: none;
+            /* Internet Explorer 10+ */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+    <!-- Search Form Component -->
+    <div class="container mx-auto max-w-screen-xl sm:px-6 sm:py-12">
+        <div class="container mx-auto">
+            <div class="flex justify-start">
+                <form class="flex items-center space-x-4 w-full max-w-md">
+                    <!-- Input search -->
+                    <input type="text" placeholder="Search..."
+                        class="flex-grow px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300" />
+    
+                    <!-- Search button -->
+                    <button type="submit"
+                        class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="container mx-auto my-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-8 max-h-[calc(100vh-8rem)] overflow-hidden overflow-y-auto scrollbar-hidden">
+                    <!-- card -->
+                    <% for(place of places) {%>
+                        <div class="space-y-8 max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hidden">
+                        <div
+                            class="relative h-56 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+                            <% if(place.images.length) {%>
+                            <img src="/images/<%= place.images[0].filename %> "
+                                alt="card-image"
+                                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                            <% }else{ %>
+                                <img src="https://images.unsplash.com/photo-1617148302839-ee02d38676ef?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="card-image"
+                                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                            <% } %>
+                            </div>
+                        <div class="p-6">
+                            <h5 class="block mb-2 font-sans text-xl font-semibold text-blue-gray-900">
+                                <%= place.title %>
+                            </h5>
+                            <h5 class="block mb-2 font-sans text-l font-semibold text-blue-gray-900">
+                                <%= place.location %>
+                            </h5>
+                            <p class="block font-sans text-base font-light text-inherit">
+                               <%= place.description%>
+                            </p>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <a
+                                class="font-sans font-bold text-center uppercase transition-all text-xs py-3 px-6 rounded-lg bg-red-600 text-white shadow-md hover:shadow-lg focus:ring-2 focus:ring-gray-500"
+                                href="/places/<%= place._id %>">
+                                View <%= place.title %>
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+    
+                <div class="relative flex flex-col text-gray-700 bg-white w-full">
+                    <div id="mapContainer" style="width: 100%;height: 450px;margin-bottom: 5%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
+            const clusterPlaces = <%- cluster %>
+
+            function startClustering(map, data) {
+                // First we need to create an array of DataPoint objects,
+                // for the ClusterProvider
+                var dataPoints = data.map(function (item) {
+                  return new H.clustering.DataPoint(item.lat, item.lng);
+                });
+              
+                // Create a clustering provider with custom options for clusterizing the input
+                var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
+                  clusteringOptions: {
+                    // Maximum radius of the neighbourhood
+                    eps: 32,
+                    // minimum weight of points required to form a cluster
+                    minWeight: 2
+                  }
+                });
+              
+                // Create a layer tha will consume objects from our clustering provider
+                var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider);
+              
+                // To make objects from clustering provder visible,
+                // we need to add our layer to the map
+                map.addLayer(clusteringLayer);
+            }
+            const platform = new H.service.Platform({
+                'apikey': 'cKKA1D0ftrVJs4QkN-6rCiVWIOiCgsvi3UEVAjhWqAs'
+            });
+            const defaultLayers = platform.createDefaultLayers();
+            const map = new H.Map(
+                document.getElementById('mapContainer'),
+                defaultLayers.vector.normal.map,
+                {
+                  zoom: 2,
+                  center: { lat: -0.9730197, lng: 116.7034266 },
+                  pixelRatio: window.devicePixelRatio || 1
+                });
+            
+            const ui = H.ui.UI.createDefault(map, defaultLayers, 'en-US');
+            const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+            startClustering(map, clusterPlaces);
+        </script>

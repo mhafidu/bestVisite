@@ -1,0 +1,72 @@
+<% layout('layouts/app') %>
+
+<div class="mb-5 mx-auto max-w-screen-xl sm:px-6 sm:py-12">
+    <h1 class="text-center text-3xl font-bold">Update Place</h1>
+    <div class="lg:flex lg:justify-between lg:space-x-8">
+        <!-- Bagian Form Update -->
+        <div class="w-full lg:w-2/3">
+            <form action="/places/<%= place._id %>?_method=PUT" method="POST" class="space-y-4" novalidate enctype="multipart/form-data">
+                <div class="mb-4">
+                    <label for="title" class="block font-medium text-gray-700">Title</label>
+                    <input type="text" name="place[title]" id="title" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<%= place.title %>" required>
+                </div>
+                <div class="mb-4">
+                    <label for="location" class="block font-medium text-gray-700">Location</label>
+                    <input type="text" name="place[location]" id="location" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<%= place.location %>" required>
+                </div>
+                <div class="mb-4">
+                    <label for="description" class="block font-medium text-gray-700">Description</label>
+                    <textarea name="place[description]" id="description" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required><%= place.description %></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="price" class="block font-medium text-gray-700">Price</label>
+                    <input type="text" name="place[price]" id="price" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<%= place.price %>" required>
+                </div>
+                <div class="mb-4">
+                    <label for="image" class="block font-medium text-gray-700">Image</label>
+                    <div class="flex items-center space-x-4">
+                        <input type="file" name="image" id="image" accept="image/*" multiple class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-lg file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    </div>
+                    <div class="text-gray-600 mt-2">
+                        <p class="text-sm">You can select multiple images to upload.</p>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Save</button>
+            </form>
+        </div>
+
+        <!-- Bagian Delete Images -->
+        <% if(place.images.length > 0) { %>
+            <div class="w-full lg:w-1/3 mt-8 lg:mt-0">
+                <h5 class="text-center text-xl font-bold mb-4">Delete Images</h5>
+                <div class="mb-4">
+                    <input type="checkbox" id="checkAll" class="mr-2">
+                    <label for="checkAll" class="text-gray-700">Check All</label>
+                </div>
+                <form action="/places/<%= place._id %>/images?_method=DELETE" method="post" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <% place.images.forEach((image, index) => { %>
+                    <div class="bg-white shadow-md rounded-lg p-4">
+                        <img src="/images/<%= image.filename %>" class="w-full h-40 object-cover rounded-md mb-4">
+                        <label class="block">
+                            <input type="checkbox" name="images[]" value="<%= image.url %>" class="mr-2">
+                            <span class="text-gray-700">Pilih</span>
+                        </label>
+                    </div>
+                    <% }) %>
+                    <div class="w-full col-span-full">
+                        <button class="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" type="submit">Delete</button>
+                    </div>
+                </form>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    document.getElementById('checkAll').addEventListener('change', function() {
+        const checkboxes = document.getElementsByName('images[]');
+        for (let i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = this.checked;
+        }
+    });
+</script>

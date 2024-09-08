@@ -1,0 +1,45 @@
+<%- layout('layouts/app') %>
+
+<h1 class="text-3xl font-bold text-center my-8">Add Place</h1>
+
+<div class="max-w-lg mx-auto">
+    <form action="/places" method="POST" class="space-y-6" novalidate enctype="multipart/form-data">
+        <!-- Title Field -->
+        <div class="flex flex-col">
+            <label for="title" class="text-lg font-medium">Title</label>
+            <input type="text" name="place[title]" id="title" class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+            <div class="text-red-500 text-sm mt-1 hidden" id="title-error">Input cannot be empty</div>
+        </div>
+
+        <!-- Location Field -->
+        <div class="flex flex-col">
+            <label for="location" class="text-lg font-medium">Location</label>
+            <input type="text" name="place[location]" id="location" class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+            <div class="text-red-500 text-sm mt-1 hidden" id="location-error">Input cannot be empty</div>
+        </div>
+
+        <!-- Price Field -->
+        <div class="flex flex-col">
+            <label for="price" class="text-lg font-medium">Price</label>
+            <input type="text" name="place[price]" id="price" class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+            <div class="text-red-500 text-sm mt-1 hidden" id="price-error">Input cannot be empty</div>
+        </div>
+
+        <!-- Image Upload Field -->
+        <div class="flex flex-col">
+            <label for="image" class="text-lg font-medium">Image</label>
+            <input type="file" name="image" id="image" accept="image/*" multiple required class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            <div class="text-red-500 text-sm mt-1 hidden" id="image-error">Input cannot be empty</div>
+        </div>
+
+        <!-- Description Field -->
+        <div class="flex flex-col">
+            <label for="description" class="text-lg font-medium">Description</label>
+            <textarea name="place[description]" id="description" rows="4" class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300" required></textarea>
+            <div class="text-red-500 text-sm mt-1 hidden" id="description-error">Input cannot be empty</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition duration-300">Save</button>
+    </form>
+</div>
